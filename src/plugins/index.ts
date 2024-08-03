@@ -10,9 +10,11 @@ import router from '../router'
 
 // Types
 import type { App } from 'vue'
+import store from '../store'
 
 export function registerPlugins (app: App) {
   app
+    .use(store)
     .use(vuetify)
     .use(router)
 }

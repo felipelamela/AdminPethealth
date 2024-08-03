@@ -1,22 +1,32 @@
 <template>
-  <v-app>
+  <!-- <v-app :theme="isDarkMode? 'light':'dark'"> -->
+    <v-app theme="light">
       <VLayout class="rounded rounded-md">
-      <AppSideBar></AppSideBar>
-        <div>
-          <v-main>
-            <router-view key="/dashboard"/>
-          </v-main>
-        </div>
-    </VLayout>
+        <AppSideBar></AppSideBar>
+        <v-main>
+          <router-view :route="$router.path" />
+        </v-main>
+      </VLayout>
 
-  </v-app>
+    </v-app>
 </template>
 
-<script lang="ts">
+<script >
+import { mapState, mapMutations } from 'vuex';
+
 export default{
   name: "App",
-  mounted(){
-    console.log(this.$router.path)
+  computed: {
+    ...mapState(['userAccess']),
+  },
+  methods: {
+    ...mapMutations(['toggleDarkMode']),
+    ...mapMutations(['AddUserAccess']),
+  },
+  created(){
+    if(Object.keys(this.userAccess).length == 0){
+      this.$router.push('/login')
+    }
   }
 }
 </script>

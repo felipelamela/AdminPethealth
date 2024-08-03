@@ -1,28 +1,26 @@
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import { createRouter, createWebHistory } from 'vue-router'
+import Internacao from '../views/Internacao.vue'
 
 const routes = [
   {
     path:'/', 
     name: "Index",
-    component: () => import('@/pages/index.vue'),
+    component: () => import('@/views/index.vue'),
   },
   {
     path: '/dashboard',
     name:"Dashboard",
-    component: () => import('@/pages/dashboard.vue'),
-    children: [
-      {
-        path: '/teste',
-        name: 'Login',
-        component: () =>
-          import('@/pages/login.vue'),
-      },
-    ],
+    component: () =>import('@/views/dashboard.vue')
+  },
+  {
+    path: '/internacao',
+    name:"Internacao",
+    component: Internacao
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/pages/login.vue'),
+    component: () => import('@/views/login.vue'),
   },
 ]
 
